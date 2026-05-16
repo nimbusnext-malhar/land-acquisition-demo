@@ -47,7 +47,7 @@ function App() {
   return (
     <ErrorBoundary>
       <div className="App">
-        <BrowserRouter basename={process.env.PUBLIC_URL}>
+        <BrowserRouter>
           <ProjectProvider>
             <Toaster position="top-right" richColors closeButton />
             <Routes>
