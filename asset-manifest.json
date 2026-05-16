@@ -1,0 +1,43 @@
+{
+  "files": {
+    "main.css": "/land-acq-demoapp/static/css/main.96f1da15.css",
+    "main.js": "/land-acq-demoapp/static/js/main.b81bb1bb.js",
+    "static/js/941.8a4afda5.chunk.js": "/land-acq-demoapp/static/js/941.8a4afda5.chunk.js",
+    "static/js/283.2f991e1f.chunk.js": "/land-acq-demoapp/static/js/283.2f991e1f.chunk.js",
+    "static/js/680.826667e2.chunk.js": "/land-acq-demoapp/static/js/680.826667e2.chunk.js",
+    "static/js/705.8e2adb15.chunk.js": "/land-acq-demoapp/static/js/705.8e2adb15.chunk.js",
+    "static/js/573.dc7d7077.chunk.js": "/land-acq-demoapp/static/js/573.dc7d7077.chunk.js",
+    "static/js/656.2cde3c78.chunk.js": "/land-acq-demoapp/static/js/656.2cde3c78.chunk.js",
+    "static/js/156.8cdda93b.chunk.js": "/land-acq-demoapp/static/js/156.8cdda93b.chunk.js",
+    "static/js/214.84628d4d.chunk.js": "/land-acq-demoapp/static/js/214.84628d4d.chunk.js",
+    "static/js/400.08c7b523.chunk.js": "/land-acq-demoapp/static/js/400.08c7b523.chunk.js",
+    "static/js/724.06095210.chunk.js": "/land-acq-demoapp/static/js/724.06095210.chunk.js",
+    "static/js/562.44e1c843.chunk.js": "/land-acq-demoapp/static/js/562.44e1c843.chunk.js",
+    "static/js/246.fe120811.chunk.js": "/land-acq-demoapp/static/js/246.fe120811.chunk.js",
+    "static/js/100.dd5352e8.chunk.js": "/land-acq-demoapp/static/js/100.dd5352e8.chunk.js",
+    "static/js/884.d3cc7b01.chunk.js": "/land-acq-demoapp/static/js/884.d3cc7b01.chunk.js",
+    "static/js/590.410adcfb.chunk.js": "/land-acq-demoapp/static/js/590.410adcfb.chunk.js",
+    "index.html": "/land-acq-demoapp/index.html",
+    "main.96f1da15.css.map": "/land-acq-demoapp/static/css/main.96f1da15.css.map",
+    "main.b81bb1bb.js.map": "/land-acq-demoapp/static/js/main.b81bb1bb.js.map",
+    "941.8a4afda5.chunk.js.map": "/land-acq-demoapp/static/js/941.8a4afda5.chunk.js.map",
+    "283.2f991e1f.chunk.js.map": "/land-acq-demoapp/static/js/283.2f991e1f.chunk.js.map",
+    "680.826667e2.chunk.js.map": "/land-acq-demoapp/static/js/680.826667e2.chunk.js.map",
+    "705.8e2adb15.chunk.js.map": "/land-acq-demoapp/static/js/705.8e2adb15.chunk.js.map",
+    "573.dc7d7077.chunk.js.map": "/land-acq-demoapp/static/js/573.dc7d7077.chunk.js.map",
+    "656.2cde3c78.chunk.js.map": "/land-acq-demoapp/static/js/656.2cde3c78.chunk.js.map",
+    "156.8cdda93b.chunk.js.map": "/land-acq-demoapp/static/js/156.8cdda93b.chunk.js.map",
+    "214.84628d4d.chunk.js.map": "/land-acq-demoapp/static/js/214.84628d4d.chunk.js.map",
+    "400.08c7b523.chunk.js.map": "/land-acq-demoapp/static/js/400.08c7b523.chunk.js.map",
+    "724.06095210.chunk.js.map": "/land-acq-demoapp/static/js/724.06095210.chunk.js.map",
+    "562.44e1c843.chunk.js.map": "/land-acq-demoapp/static/js/562.44e1c843.chunk.js.map",
+    "246.fe120811.chunk.js.map": "/land-acq-demoapp/static/js/246.fe120811.chunk.js.map",
+    "100.dd5352e8.chunk.js.map": "/land-acq-demoapp/static/js/100.dd5352e8.chunk.js.map",
+    "884.d3cc7b01.chunk.js.map": "/land-acq-demoapp/static/js/884.d3cc7b01.chunk.js.map",
+    "590.410adcfb.chunk.js.map": "/land-acq-demoapp/static/js/590.410adcfb.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.96f1da15.css",
+    "static/js/main.b81bb1bb.js"
+  ]
+}
