@@ -60,7 +60,7 @@
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
-    "predeploy": "bun run build",
+    "predeploy": "bun run build && cp build/index.html build/404.html",
     "deploy": "gh-pages -d build"
   },
   "browserslist": {
