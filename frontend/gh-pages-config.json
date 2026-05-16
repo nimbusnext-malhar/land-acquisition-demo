@@ -1,0 +1,7 @@
+{
+  "homepage": "https://nimbusnext-malhar.github.io/land-acq-demoapp/",
+  "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+  }
+}

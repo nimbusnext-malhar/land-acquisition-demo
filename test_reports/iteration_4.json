@@ -1,0 +1,54 @@
+{
+  "summary": "Iteration 4 — Live LLM (Claude Sonnet 4.5 via Emergent universal key) integration tested end-to-end. Backend POST /api/chat exercised with a free-form question for all 3 projects and 4 error/regression cases — 7/7 pytest assertions PASSED in 16.1s. Frontend Playwright smoke covered: Live LLM toggle pill, Claude Sonnet 4.5 sub-text + greeting badge, real /api/chat round-trip with typing indicator + Live badge + confidence + cited snippet, scripted toggle round-trip, project switch (P1->P2) reset + greeting refresh, regression of /dashboard /projects /workflow /valuation /reports. Zero console or page errors observed. Fallback code path 'Live LLM unavailable' verified present in /app/frontend/src/pages/Chatbot.jsx line 87.",
+  "backend_issues": { "critical": [], "minor": [] },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "tests_executed": [
+    "POST /api/chat MMRDA-2026-0142 'outstanding mortgage' -> 200, model=claude-sonnet-4-5-20250929, citation chunk starts p1-",
+    "POST /api/chat MMRDA-2026-0098 'is title clear?' -> 200, citation chunk starts p2-",
+    "POST /api/chat MMRDA-2026-0117 'why disputed?' -> 200, citation chunk starts p3-",
+    "POST /api/chat unknown project_id MMRDA-2026-9999 -> 400 'Unknown project_id'",
+    "POST /api/chat empty/whitespace message -> 400",
+    "POST /api/chat missing fields -> 422",
+    "GET /api/ -> 200 {message: Hello World}",
+    "Frontend login -> /dashboard redirect (auto pre-filled credentials)",
+    "Chatbot header shows 'Live LLM' toggle pill + 'Claude Sonnet 4.5' sub-text",
+    "Greeting message renders with 'Live · Claude Sonnet 4.5' badge",
+    "Free-form question triggers /api/chat POST -> typing indicator 'Claude Sonnet 4.5 reasoning over Yavi.ai corpus…' -> assistant message with Live badge + confidence + Cited snippet box",
+    "Toggle off Live -> pill text becomes 'Scripted'; subsequent message renders with 'Scripted' badge",
+    "Toggle back to Live -> pill returns to 'Live LLM'",
+    "Project switcher P1->P2 -> chatbot conversation reset + greeting now mentions 'Mumbai Trans Harbour Link' and 'MMRDA-2026-0098'",
+    "Regression nav: /dashboard /projects /workflow /valuation /reports all render without errors",
+    "Code-path check: 'Live LLM unavailable' fallback string present at Chatbot.jsx:87"
+  ],
+  "test_report_links": [
+    "/app/backend/tests/test_chat.py",
+    "/app/test_reports/pytest/iteration_4_chat.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "server.py /api/chat properly validates project_id (400) and empty message (400), and returns 502 on Claude failure with detail — clean error handling.",
+    "_parse_llm_json() in server.py is robustly defensive: strips ```json fences, falls back to first {...} block, and gracefully returns {} on JSONDecodeError. Good.",
+    "model field is hard-coded to 'claude-sonnet-4-5-20250929' in the response — matches review spec exactly.",
+    "session_id is generated per request as 'mmrda-{project_id}-{8hex}' — fine for stateless RAG calls; if conversation memory is later required, this should be persisted client-side and reused.",
+    "Citation field truncation (doc 200, chunk 80, line 400) is sensible defensive sizing.",
+    "Chatbot.jsx: useEffect dependency array includes liveMode (line 55) which means toggling resets the entire conversation. This is acceptable per spec ('greeting refreshes') but may surprise users mid-conversation; consider preserving prior messages and only refreshing the greeting badge in a future iteration.",
+    "Chatbot.jsx fallback path on live failure (lines 84-93) appends a system note then continues to scripted — exactly as spec'd. Good.",
+    "Backend logger is initialised AFTER it is referenced inside chat_with_yavi (logger defined at module bottom line 194 but used at line 146). Python evaluates the name at call-time so this works, but it is fragile — recommend moving the logging.basicConfig + logger = ... block above the route handlers.",
+    "EMERGENT_LLM_KEY is read from env at request time (good) and returns 503 if missing (good).",
+    "No Pydantic validation on max message length — could let users submit very large prompts. Consider a soft cap (e.g. 2000 chars) to bound Claude cost."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_chat.py (new)"
+  ],
+  "success_rate": { "backend": "100% (7/7 pytest)", "frontend": "100% (all chatbot live/scripted/switch + regression assertions passed)" },
+  "test_credentials": "Mock auth — pre-filled 'officer' / 'mmrda@2026', role 'Legal Officer'. EMERGENT_LLM_KEY already set in /app/backend/.env.",
+  "seed_data_creation": "None — PROJECT_CONTEXT corpus is static in /app/backend/project_context.py.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Iteration 4 fully passes. /api/chat is live and grounded per-project (citation chunks always carry the correct p1/p2/p3 prefix — verified for all 3 projects with real Claude calls). Frontend Live/Scripted toggle, typing indicator copy, badges, confidence, cited snippet, project-switch reset, and fallback code path are all wired correctly. One minor non-blocking nit: backend logger is initialised AFTER it is referenced (works but fragile). Consider moving logger init to top of server.py.",
+  "rca of the issue": "No issues found in this iteration."
+}

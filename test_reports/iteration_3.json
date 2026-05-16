@@ -1,0 +1,52 @@
+{
+  "summary": "Iteration 3 frontend-only Playwright E2E run focused on per-project data isolation, chatbot reset-on-switch, and regression of all prior screens. All assertions PASSED. The 3 projects (MMRDA-2026-0142 Conditional / MMRDA-2026-0098 Clear / MMRDA-2026-0117 Disputed) each show a unique document corpus, validation decision card, gov-API states, RAG chunk IDs (p1/p2/p3 prefix), and chatbot scripted responses with correct citations. No console errors or page errors observed.",
+  "backend_issues": { "critical": [], "minor": [] },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "tests_executed": [
+    "Login -> /dashboard redirect (auto pre-filled credentials)",
+    "P1 (Conditional) Workspace: 6 docs [p1-712, p1-pcard, p1-aadhaar, p1-saledeed, p1-mutation, p1-ec], badge='Title: Conditional'",
+    "P1 Validation decision card shows 'Conditional' with headline mentioning 'mortgage discharge'",
+    "P1 RAG pipeline: 5 chunks all prefixed 'chunk-p1-ch-*'",
+    "P1 Chatbot greeting mentions 'Virar' and '6 documents'; user-typed message rendered",
+    "Project switch P1->P2 via header switcher: chatbot conversation reset (no P1 user message), greeting now mentions 'Mumbai Trans Harbour' and '7 documents'",
+    "P2 (Clear) Workspace: 7 docs all p2-* (no p1-* leakage), badge='Title: Clear'",
+    "P2 Validation: decision='Clear' with 'ready for compensation' headline; 0 vchecks in REVIEW state (all 7 PASS)",
+    "P2 RAG pipeline: 5 chunks all prefixed 'chunk-p2-ch-*'",
+    "P2 Chatbot 'Is the title clear?' suggested-prompt -> 'Yes... Clear ...96.4%' with citations p2-ch-058 and p2-ch-074",
+    "P2 Chatbot header sub-text shows '198 chunks · 7 docs'",
+    "P3 (Disputed) Workspace: 9 docs all p3-* (no p1/p2 leakage), badge='Title: Disputed'",
+    "P3 Validation decision='Disputed' with 'Bombay HC Suit 4421/2025' headline",
+    "P3 Gov-API grid: ec=Failed, mahabhulekh/pan/gis=Warning, uidai/igrs=Verified (matches spec exactly)",
+    "P3 RAG pipeline: 5 chunks all prefixed 'chunk-p3-ch-*'",
+    "P3 Chatbot 'Is the title clear?' -> 'Disputed ... 71.2%' with citations p3-ch-128 and p3-ch-152",
+    "P3 Chatbot header sub-text shows '287 chunks · 9 docs'",
+    "Switch back P3->P1: workspace shows only p1-* docs (no p3-* residue)",
+    "Regression: /dashboard, /projects, /workflow, /valuation, /reports, /projects/new all render their primary data-testids",
+    "No console errors, no page errors during the entire run"
+  ],
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "useProjectData() hook is clean: derives data via getProjectData(project.id) and falls back to project 1 if id is unknown — good defensive default.",
+    "Workspace.jsx correctly resets selected document via useEffect on project.id change (line 24); no stale viewer.",
+    "Chatbot.jsx resets messages array on project switch via useEffect (line 34) — verified empirically (P1 user message disappears after switch).",
+    "RagPipeline.jsx replays the pipeline animation by resetting activeIndex to 0 on project change — verified.",
+    "Validation.jsx dynamically picks DECISION_TONE colour/icon by project.status — Clear=emerald/ShieldCheck, Conditional=amber/AlertCircle, Disputed=rose/AlertOctagon — all three render correctly.",
+    "Minor cosmetic: Validation.jsx 'Workflow' mini-stepper at lines 167-172 still hard-codes '6 / 6 docs uploaded' and 'Yavi.ai · 92.7% conf' — these are stale for projects 2 and 3. Not part of iteration-3 isolation spec but worth noting.",
+    "Minor cosmetic: PIPELINE_NODES in mockData.js still shows hardcoded '6 docs · 23 pages' and '165 chunks' subtitles — these labels render the same regardless of active project on /rag-pipeline. The dynamic stat cards above are correct, but the node sub-labels are static. Not blocking.",
+    "Per-project data file projectData.js is large (~480 lines) but well-organised by project block — acceptable for a static-mock demo.",
+    "All chunk ids, doc ids, project-switcher data-testids match the review-request spec exactly."
+  ],
+  "updated_files": [],
+  "success_rate": { "backend": "n/a (skipped per request)", "frontend": "100% — all isolation, switch-reset, and regression assertions passed" },
+  "test_credentials": "Mock auth — pre-filled 'officer' / 'mmrda@2026', role 'Legal Officer'. localStorage keys: mmrda_user, mmrda_active_project.",
+  "seed_data_creation": "None — all data is static per-project mock data in /app/frontend/src/data/projectData.js (3 projects).",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Iteration-3 fully passes. Per-project data isolation is solid: switching active project completely swaps Workspace docs (p1-*/p2-*/p3-*), Validation decision card (Conditional/Clear/Disputed), Government-API states (P3 has 1 'error' + 3 'warning'), RAG sample chunks (p{1,2,3}-ch-*), and Chatbot greeting + scripted answers. The Chatbot also clears prior messages on project switch (verified). Two minor static-label leakages remain in (a) Validation.jsx mini Workflow stepper hardcoded '6 / 6 docs · 92.7% conf' and (b) PIPELINE_NODES subtitles in mockData.js — both non-blocking and not part of the iteration-3 isolation spec.",
+  "rca of the issue": "No issues found in this iteration."
+}

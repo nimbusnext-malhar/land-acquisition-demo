@@ -1,0 +1,154 @@
+{
+  "theme": "light",
+  "archetype": "Swiss & High-Contrast (Enterprise GovTech Edition)",
+  "colors": {
+    "background": "#F8FAFC",
+    "surface": "#FFFFFF",
+    "primary": "#0A2540",
+    "primary_hover": "#0F365A",
+    "secondary": "#0E7490",
+    "accent_cyan": "#06B6D4",
+    "accent_sky": "#38BDF8",
+    "text_primary": "#0F172A",
+    "text_secondary": "#475569",
+    "border": "#E2E8F0",
+    "success": "#10B981",
+    "warning": "#F59E0B",
+    "error": "#EF4444",
+    "ai_glow": "rgba(6, 182, 212, 0.4)",
+    "ai_panel_bg": "#0B1521"
+  },
+  "typography": {
+    "headings": "Cabinet Grotesk",
+    "body": "IBM Plex Sans",
+    "mono": "JetBrains Mono",
+    "hierarchy": {
+      "h1": "text-4xl sm:text-5xl tracking-tight font-bold text-[#0F172A]",
+      "h2": "text-2xl sm:text-3xl tracking-tight font-semibold text-[#0F172A]",
+      "h3": "text-xl sm:text-2xl font-semibold text-[#0F172A]",
+      "body": "text-base leading-relaxed text-[#475569]",
+      "small": "text-sm text-slate-500",
+      "overline": "text-xs tracking-[0.2em] uppercase font-bold text-cyan-700"
+    }
+  },
+  "spacing_and_layout": {
+    "grid_strategy": "MODE B: THE CONTROL ROOM GRID",
+    "container_padding": "p-6 md:p-8",
+    "gap": "gap-6",
+    "border_radius": "rounded-lg"
+  },
+  "components": {
+    "cards": {
+      "style": "bg-white border border-slate-200 shadow-sm rounded-lg",
+      "ai_panel": "bg-[#0B1521] border border-cyan-900/50 text-white shadow-[0_0_15px_rgba(6,182,212,0.15)] rounded-lg"
+    },
+    "buttons": {
+      "primary": "bg-[#0A2540] text-white hover:bg-[#0F365A] rounded-md transition-colors shadow-sm",
+      "ai_action": "bg-cyan-700 text-white hover:bg-cyan-600 rounded-md transition-colors shadow-[0_0_10px_rgba(6,182,212,0.3)]",
+      "secondary": "bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 rounded-md transition-colors"
+    },
+    "glassmorphism": {
+      "header": "backdrop-blur-xl bg-white/80 border-b border-slate-200"
+    },
+    "badges": {
+      "ai_confidence": "bg-cyan-950 text-cyan-400 border border-cyan-800 text-xs px-2 py-1 rounded-full flex items-center gap-1",
+      "status_clear": "bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs px-2 py-1 rounded-full",
+      "status_disputed": "bg-amber-50 text-amber-700 border border-amber-200 text-xs px-2 py-1 rounded-full"
+    }
+  },
+  "screens": {
+    "login": {
+      "layout": "Split screen. Left: Full-screen background image of Mumbai with a heavy #0A2540/80 overlay. Right: Solid white panel.",
+      "elements": [
+        "MMRDA Branding (State Emblem + Authority Name)",
+        "Enterprise Login Form",
+        "Powered by Yavi.ai badge"
+      ]
+    },
+    "dashboard": {
+      "layout": "Dense Control Room Grid (grid-cols-1 md:grid-cols-4 lg:grid-cols-12 gap-6).",
+      "elements": [
+        "KPI Widgets (col-span-3): Active Projects, Documents Uploaded, Titles Cleared, Pending Legal Review",
+        "Acquisition Chart (col-span-8)",
+        "AI Confidence Meter (col-span-4, dark AI panel styling)"
+      ]
+    },
+    "project_workspace": {
+      "layout": "3-panel view (col-span-3 list, col-span-6 central viewer, col-span-3 AI summary).",
+      "elements": [
+        "Document List (Left)",
+        "Document Viewer with OCR text & ownership chain timeline (Center)",
+        "AI Validation Summary with risk flags (Right - dark styling)"
+      ]
+    },
+    "rag_pipeline": {
+      "layout": "Horizontal flow container spanning full width.",
+      "elements": [
+        "Nodes: Upload -> OCR -> Metadata -> Chunking -> Embeddings -> Yavi.ai Vector Store -> Semantic Search -> AI Decision",
+        "Use animated data lines (framer-motion or CSS SVGs) connecting nodes",
+        "Abstract data background image with low opacity"
+      ]
+    },
+    "ai_chatbot": {
+      "layout": "Floating chat interface or dedicated right panel (col-span-4).",
+      "elements": [
+        "Yavi.ai Branding",
+        "Message bubbles with citations & source document links",
+        "Suggested prompt pills",
+        "Typing animation"
+      ]
+    },
+    "title_validation": {
+      "layout": "Bento grid of verification cards.",
+      "elements": [
+        "Gov API Cards (MahaBhulekh, UIDAI, PAN, Property Reg) with pulsing status indicators",
+        "Title Status (Clear/Conditional/Disputed)",
+        "AI Recommendation Panel"
+      ]
+    }
+  },
+  "media": {
+    "image_urls": [
+      {
+        "url": "https://images.unsplash.com/photo-1705675451865-2a0b7ec9fc50?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2MDV8MHwxfHNlYXJjaHwxfHxtdW1iYWklMjBza3lsaW5lJTIwYXJjaGl0ZWN0dXJlfGVufDB8fHx8MTc3ODEyOTg5NHww&ixlib=rb-4.1.0&q=85",
+        "description": "Mumbai Skyline from green space",
+        "category": "login_background"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1562979314-bee7453e911c?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzR8MHwxfHNlYXJjaHwyfHxiYW5kcmElMjB3b3JsaSUyMHNlYSUyMGxpbmt8ZW58MHx8fHwxNzc4MTI5ODk0fDA&ixlib=rb-4.1.0&q=85",
+        "description": "Bandra Worli Sea Link at Golden Hour",
+        "category": "dashboard_banner_or_hero"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1738082956213-aa554ba67bda?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxODh8MHwxfHNlYXJjaHwxfHxhYnN0cmFjdCUyMGRhdGElMjBuZXR3b3JrJTIwYmx1ZXxlbnwwfHx8fDE3NzgxMjk4OTh8MA&ixlib=rb-4.1.0&q=85",
+        "description": "Abstract data nodes/spheres in blue",
+        "category": "rag_pipeline_background"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1721244654392-9c912a6eb236?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxOTJ8MHwxfHNlYXJjaHwxfHxibHVlcHJpbnQlMjBhcmNoaXRlY3R1cmV8ZW58MHx8fHwxNzc4MTI5ODk4fDA&ixlib=rb-4.1.0&q=85",
+        "description": "Blueprint of a building",
+        "category": "project_workspace_placeholder"
+      }
+    ]
+  },
+  "icons_library": "lucide-react",
+  "motion": {
+    "hover": "transition-all duration-200 ease-in-out",
+    "pipeline_animation": "react-fast-marquee or framer-motion for glowing data line flows",
+    "micro_interactions": "scale-[1.02] on card hover, -translate-y-1"
+  },
+  "testing": {
+    "requirements": "All interactive and key informational elements MUST include a data-testid attribute in kebab-case."
+  },
+  "instructions_to_main_agent": [
+    "Install custom fonts: Cabinet Grotesk, IBM Plex Sans, JetBrains Mono.",
+    "Use pure HTML + Tailwind CSS for layout structure. Heavily customize Shadcn components for interactive logic (Forms, Modals, Inputs).",
+    "Never use native <input> or <select>. Use Shadcn Input, Select, Form.",
+    "Implement the 'Swiss & High-Contrast' archetype but tailored for Indian GovTech (deep navy + teal/cyan accents).",
+    "Use the dark AI panel styling (bg-[#0B1521] + cyan border/glow) specifically for RAG/Yavi.ai components to distinguish AI insights from standard government data.",
+    "Ensure the layout feels 'investor-ready' and premium. Don't crowd elements, use generous padding (p-6/p-8) on cards.",
+    "Implement the 6 requested screens and link them via a common navigation header or sidebar.",
+    "Use Lucide-React icons heavily for visual indicators.",
+    "Integrate the provided Unsplash images for the login background, pipeline background, and document placeholders."
+  ]
+}

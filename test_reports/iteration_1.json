@@ -1,0 +1,29 @@
+{
+  "summary": "Frontend-only Playwright E2E run on the MMRDA AI Land-Title demo (mock app, no backend). Verified login (default Legal Officer), protected route redirect, sidebar marker rendering for all 4 active inner routes, dashboard KPIs/charts, workspace doc/tab interaction, RAG pipeline (9 nodes + 5 chunks + embeddings card), chatbot scripted retrieval (suggested-prompt + free-text + typing indicator + confidence badge + cited snippet — confirms the answer→text mapping fix is working), Title Validation (Conditional decision, 92.7%, 7 checklist items, 6 gov-API cards, verify button → success toast), and logout (clears localStorage + redirects to /login). All 11 critical assertions PASSED. No JS console errors or page errors captured.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "Chatbot.jsx: greeting message uses straight quote in the rendered string - fine, but the message renderer splits on '**' for bold; long answers without paired '**' will simply render the literal text which is acceptable.",
+    "App.js line 25: <Navigate to={isAuthed() ? '/dashboard' : '/login'}/> evaluates isAuthed() once at module render. This is fine in this app because the route only mounts once on '/', but worth noting that toggling auth elsewhere will not re-evaluate this redirect until a remount.",
+    "PipelineFlow node IDs (upload, ocr, metadata, chunking, embedding, vector, search, rules, decision) differ from the names listed in the review request ('chunk', 'embed', 'store', 'query', 'retrieve', 'generate'). The review-request naming was illustrative — the actual 9 nodes all render correctly. No code change needed; just calling out the doc/spec ↔ code naming mismatch so future testing scripts use the correct testids.",
+    "Login.jsx: form pre-fills credentials and any non-empty input is accepted (per spec) — no validation issue, but worth confirming this is intentional for production builds (it is, since this is a demo).",
+    "No data-testid is present on the Sale Deed/Mutation tabs in workspace doc-viewer beyond tab-ocr/tab-meta/tab-chain — sufficient for current spec."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "n/a (skipped per request)", "frontend": "100% (11/11 critical flows)"},
+  "test_credentials": "Mock auth — any non-empty username/password accepted. Pre-filled: officer / mmrda@2026, role 'Legal Officer'. localStorage key: mmrda_user.",
+  "seed_data_creation": "None — all data is static mock data in /app/frontend/src/data/mockData.js.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Active pipeline-node testids are: pipeline-node-upload, -ocr, -metadata, -chunking, -embedding, -vector, -search, -rules, -decision (NOT chunk/embed/store/query/retrieve/generate as in the review request). 5 sidebar items (api-verification, legal-review, valuation, reports, settings) are intentionally disabled with 'soon' badges and have data-testids nav-api-verification, nav-legal-review, nav-valuation, nav-reports, nav-settings. Verify buttons on Validation page are data-testid verify-{id} where id ∈ mahabhulekh, uidai, pan, igrs, ec, gis. Sonner toast renders inside [data-sonner-toast].",
+  "rca of the issue": "No issues found. The previously reported chatbot 'answer vs text' rendering bug is fixed and verified end-to-end: clicking suggested prompt 'Is the title clear?' produced an assistant message with 'Conditional' answer text, conf 92% badge, citation badges (Encumbrance Certificate · ch-077, 7/12 Extract · ch-018), and a cited snippet box — none of which would render if the mapping were broken. Free-text input 'Show me the ownership chain' also returned a properly populated assistant message."
+}
